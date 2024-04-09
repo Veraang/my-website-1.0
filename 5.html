@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>匹配结果</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+    }
+    #loading {
+        font-size: 24px;
+        margin-top: 20px;
+        display: none;
+    }
+    #result {
+        font-size: 24px;
+        margin-top: 20px;
+        display: none;
+    }
+</style>
+</head>
+<body>
+<h1>请输入人名：</h1>
+<input type="text" id="inputName">
+<button onclick="matchName()">开始匹配</button>
+<div id="loading">正在匹配……</div>
+<div id="result"></div>
+
+<script>
+function getRandomResult(array) {
+    return array[Math.floor(Math.random() * array.length)];
+}
+
+function showResult(result) {
+    var loadingDiv = document.getElementById('loading');
+    var resultDiv = document.getElementById('result');
+    loadingDiv.style.display = 'none';
+    resultDiv.style.display = 'block';
+    resultDiv.textContent = result;
+}
+
+function matchName() {
+    var input = document.getElementById('inputName').value.trim();
+    var result;
+    switch (input) {
+        case '杨燕':
+            result = getRandomResult(['胡靓', '王丽']);
+            break;
+        case '李嘉仪':
+            result = getRandomResult(['许可可', '叶磊']);
+            break;
+        default:
+            result = '未找到匹配的结果，请输入“杨燕”或“李嘉仪”。';
+    }
+    document.getElementById('inputName').value = ''; // Clear input field
+    document.getElementById('result').style.display = 'none'; // Hide previous result
+    document.getElementById('loading').style.display = 'block'; // Show loading message
+    setTimeout(function() {
+        showResult(result);
+    }, 5000); // Show result after 5 seconds
+}
+</script>
+</body>
+</html>
